@@ -1,0 +1,243 @@
+﻿@model FinanceProcessor.Core.Statement.PageResources
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <style type="text/css">
+         p.uspsBarCode {
+             font-family: USPSIMBCompact; 
+             font-size:32pt !important;
+         }
+          p.header {
+             font-family: "Times New Roman";
+             font-size:21pt !important;
+             margin-bottom: 0rem !important;
+         }
+         p {
+             font-family: "Times New Roman";
+             font-size:24pt !important;
+             margin-bottom: 0rem !important;
+             line-height: 1.2 !important;
+         }
+         p.footer {
+             font-family: "Times New Roman";
+             font-size:20pt !important;
+             margin-bottom: 0rem !important;
+             line-height: 1.2 !important;
+         }
+          h3 {
+             font-family: "Times New Roman";
+             font-weight: bold;
+             margin-top: 55px;
+             text-align: center;
+         }
+         h4 {
+             font-family: "Times New Roman";
+             font-weight: bold;
+             margin-top: 35px;
+             text-align: center;
+              font-size:16pt;
+         }
+         .italic{
+             font-style:italic;
+             font-weight:100;
+             font-size:23pt !important;
+         }
+    </style>
+
+   <style type="text/css">
+        @foreach(var style in Model.Styles)
+        {
+            @style
+        }
+   </style>
+
+   <style>
+        table 
+        {
+          border-collapse: collapse;
+          width: 100%;
+        }
+        th, td 
+        {
+          text-align: left;
+          padding: 8px;
+          margin: 10px;
+          font-family: "Times New Roman";
+          font-size:23pt !important;
+          line-height: 1.2 !important;
+        }
+        tr:nth-child(even) 
+        {
+            background-color: #deddde;
+        }
+</style>
+
+</head>
+<body>
+
+
+@{
+    static object[][] SplitArray(int num)
+    {
+        var numbers = Enumerable.Range(1, num).ToArray();
+        var result = new List<object[]>();
+
+        // split the array into smaller arrays with a maximum size of 20
+        var chunks = numbers.Select((x, i) => new { Index = i, Value = x })
+                            .GroupBy(x => x.Index / 20)
+                            .Select(g => g.Select(x => x.Value).ToArray())
+                            .ToList();
+
+        // take first 5 items into one array
+        var firstChunk = chunks.FirstOrDefault();
+        var firstFive = firstChunk?.Take(5).ToArray() ?? new int[0];
+
+        // add the first five items to the result array
+        result.Add(firstFive.Cast<object>().ToArray());
+
+        // add the remaining chunks to the result array
+        foreach (var chunk in chunks.Skip(1))
+        {
+            result.Add(chunk.Cast<object>().ToArray());
+        }
+
+        return result.ToArray();
+    }
+}
+
+
+    <div style="position: fixed; left: 0px; top: 2150px; width: 100%; transform-origin: bottom left;">
+        <p class="footer" style="margin: 0; text-align: left; white-space:pre">Donations Receipt #@Model.FinancialStatement.ReceiptID.ToUpper()                        Produced by Tzedokos App - https://ahavastzedokos.com                                        Page 1 of 2</p>
+        </div>
+
+        <div class="container-fluid">
+
+         <div class="row" style="margin-top:20px !important">
+      <div class="col-md-1" style="padding-left: 0px !important;">
+            <img width="150" src="data:image/jpg;base64,@Model.Images["logo"]" />
+        </div>
+        <div class="col-md-11" style="padding-left:25px; margin:0px;">
+            <p class="header" style="margin-top:12px; font-size:35px !important">Ahavas Tzedokos</p>
+            <p class="header">TaxID# 81-3148868</p>
+            <p class="header">Shluchei Mitzva • Zichron Shlotmo • Tomchei Tzedaka • Bais Yisroel • Botoshan • Ahavas Yisroel • Chasadim Tovim</p>
+            <p class="header">326 3rd St, Lakewood, New Jersey 08701 | (347) 429-5000</p>
+        </div>
+      </div>
+
+      <hr/>
+
+      <h3 style="font-size:45px">Donations Receipt - @Model.FinancialStatement.ReceiptID.ToUpper()</h3>
+
+      <div class="row mt-6" style="margin-top:108px">
+      <div style="position: absolute; left: 0; top: 0; height: 100%; width: 50px; padding: 30px 0; background-color: black; transform-origin: top left; transform: rotate(-90deg);">
+        <p style="font-style: italic; margin: 0; text-align: center;">Vertical Text</p>
+      </div>
+      <div class="col-md-9" style="padding-left:145px">
+            <p style="position:absolute; font-style: italic; color: dimgray; transform: rotate(-90deg);top:75px; left:85px; font-size:15px !important">@Model.FinancialStatement.TraySort</p>
+            <p>@Model.FinancialStatement.FullName</p>
+            <p>@Model.FinancialStatement.AddressLine1</p>
+            <p>@Model.FinancialStatement.City @Model.FinancialStatement.State @Model.FinancialStatement.ZIPCode</p>
+            <p class="uspsBarCode">@Model.FinancialStatement.IMBarcode</p>
+        </div>
+        <div class="col-md-3" style="padding-left:115px">
+             <p>Receipt: @Model.FinancialStatement.ReceiptID.ToUpper()</p>
+        </div>
+      </div>
+
+
+      <div class="row mt-6" style="margin-top:100px !important;">
+      <div class="col-md-12">
+            <p style="font-weight:600; font-size:35px !important">@Model.FinancialStatement.FullName</p>
+            <p style="margin-top:30px">For your records, to follow represents a receipt for your kind and generous donations pledged in Fiscal Year 2022</p>          
+      </div>      
+       <div class="col-md-12 mt-4" style="margin-top:65px !important">
+            <p>Please also send us your current email address so we may be efficient with our records and our communication
+with you. To do so, simply send us your email and contact detail updates to ahavastzedokos@gmail.com
+or send a text to (347) 429-5000. We also welcome any questions or comments by either email or phone.
+</p>       
+      </div> 
+    </div>
+
+
+      <div class="row mt-6" style="margin-top:80px !important">
+      <div class="col-md-9">
+            <p>Alternatively, as an additional courtesy, you may use the QR Code provided here
+to update your contact information and to review your donation history:
+</p>
+        </div>
+        <div class="col-md-3">
+            <img  width="300" src="data:image/png;base64,@Model.Images["qrCode"]"/>
+        </div>
+      </div>
+      
+      <div class="row mt-4" style="margin-top:40px">
+      <div class="col-md-12">
+     
+      <table>
+              <tr>
+                <th>Date</th>
+                <th>Check #</th>
+                <th>Amount</th>
+              </tr>
+
+              @foreach(var payment in Model.FinancialStatement.Payments.Take(5))
+              {
+                <tr>
+                  <td>@payment.Date.Month/@payment.Date.Day/@payment.Date.Year</td>
+                  <td>@payment.CheckNumber</td>
+                  <td>$@payment.Amount</td>
+                </tr>
+              }
+            </table>
+
+            <div style="page-break-before:always">&nbsp;</div>
+
+            <table>
+              <tr>
+                <th>Date</th>
+                <th>Check #</th>
+                <th>Amount</th>
+              </tr>
+
+              @foreach(var payment in Model.FinancialStatement.Payments.Skip(5))
+              {
+                <tr>
+                  <td>@payment.Date.Month/@payment.Date.Day/@payment.Date.Year</td>
+                  <td>@payment.CheckNumber</td>
+                  <td>$@payment.Amount</td>
+                </tr>
+              }
+
+              <tr style="background-color: #ffff;">
+                <td style="font-weight:600 !important; font-size: 40px !important">Total</td>
+                <td></td>
+                <td>$@Model.FinancialStatement.Payments.Sum(x=>x.Amount)</td>
+              </tr>
+            </table>
+
+      </div>
+
+      </div>
+
+       <h4 style="font-size:28px; margin-top:100px">Thank you for your support! Your generous contributions have helped families and individuals in need. On behalf of everyone
+here, including those who were served directly through your care and concern, thank you once more. May Hashem bless you with
+bountiful bracha and parnassa, gezinterheit!
+</h4>
+
+   <h3 class="italic" style="font-size:25px"> No goods or services of any value were or will be transferred to you in connetction with these donations.
+ <br />Please keep this written acknowledgment of your donations for your tax records.
+
+</h3>
+
+    <div/>
+
+    </div>
+
+
+</body>
+</html>

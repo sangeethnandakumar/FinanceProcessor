@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using FinanceProcessor.Core.Stetement;
+using System.Collections.Generic;
 
-namespace FinanceProcessor.Core.Stetement
+namespace FinanceProcessor.Core.Statement
 {
     public class PageResources
     {
