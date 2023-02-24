@@ -10,12 +10,12 @@ namespace FinanceProcessor
 
     public class FirstPage
     {
-        public string DetailExcelLoc { get; set; }
-        public string GroupExcelLoc { get; set; }
-        public string SinglePDFLoc { get; set; }
-        public string MultiPDFLoc { get; set; }
-        public DataTable DetailTable { get; set; }
-        public DataTable GroupTable { get; set; }
+        public string DetailExcelLoc { get; set; } = string.Empty;
+        public string GroupExcelLoc { get; set; } = string.Empty;
+        public string SinglePDFLoc { get; set; } = string.Empty;
+        public string MultiPDFLoc { get; set; } = string.Empty;
+        public DataTable DetailTable { get; set; } = new DataTable();
+        public DataTable GroupTable { get; set; } = new DataTable();
     }
 
     public class SecondPage

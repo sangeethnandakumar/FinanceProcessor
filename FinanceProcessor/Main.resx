@@ -330,8 +330,12 @@
 </value>
   </data>
   <data name="label20.Text" xml:space="preserve">
-    <value>The app autodetects CPU cores. Keep default to utilise max power of CPU.
-If you're experiancing non responsiveness due to heavy CPU load, try reduce down CPU usage here. Note that, This will make processing slower</value>
+    <value>The app autodetects CPU cores available in this computer.
+
+Keep defaults to utilise max power of CPU. This will lead to faster completion
+
+If you're experiancing non responsiveness due to heavy CPU load, try reduce down CPU usage with this setting.
+Note that, This will make processing slower</value>
   </data>
   <data name="pictureBox4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

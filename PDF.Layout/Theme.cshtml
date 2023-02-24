@@ -79,12 +79,8 @@
 
 </head>
 <body>
-    
-    <div style="position: fixed; left: 0px; top: 2150px; width: 100%; transform-origin: bottom left;">
-        <p class="footer" style="margin: 0; text-align: left; white-space:pre">Donations Receipt #@Model.FinancialStatement.ReceiptID.ToUpper()                        Produced by Tzedokos App - https://ahavastzedokos.com                                        Page 1 of 1</p>
-      </div>
 
-    <div class="container-fluid">
+    <div class="container-fluid" style="margin-top:100px !important">
 
          <div class="row" style="margin-top:20px !important">
       <div class="col-md-1" style="padding-left: 0px !important;">
@@ -98,7 +94,7 @@
         </div>
       </div>
 
-      <hr/>
+      <hr style="border-color: black !important;">
 
       <h3 style="font-size:45px">Donations Receipt - @Model.FinancialStatement.ReceiptID.ToUpper()</h3>
 
@@ -113,16 +109,13 @@
             <p>@Model.FinancialStatement.City @Model.FinancialStatement.State @Model.FinancialStatement.ZIPCode</p>
             <p class="uspsBarCode">@Model.FinancialStatement.IMBarcode</p>
         </div>
-        <div class="col-md-3" style="padding-left:115px">
-             <p>Receipt: @Model.FinancialStatement.ReceiptID.ToUpper()</p>
-        </div>
       </div>
 
 
       <div class="row mt-6" style="margin-top:100px !important;">
       <div class="col-md-12">
             <p style="font-weight:600; font-size:35px !important">@Model.FinancialStatement.FullName</p>
-            <p style="margin-top:30px">For your records, to follow represents a receipt for your kind and generous donations pledged in Fiscal Year 2022</p>          
+            <p style="margin-top:30px">For your records, to follow represents a receipt for your kind and generous donations pledged in Fiscal Year 2022.</p>          
       </div>      
        <div class="col-md-12 mt-4" style="margin-top:65px !important">
             <p>Please also send us your current email address so we may be efficient with our records and our communication
@@ -180,7 +173,7 @@ here, including those who were served directly through your care and concern, th
 bountiful bracha and parnassa, gezinterheit!
 </h4>
 
-   <h3 class="italic" style="font-size:25px"> No goods or services of any value were or will be transferred to you in connetction with these donations.
+   <h3 class="italic" style="font-size:25px"> No goods or services of any value were or will be transferred to you in connection with these donations.
  <br />Please keep this written acknowledgment of your donations for your tax records.
 
 </h3>

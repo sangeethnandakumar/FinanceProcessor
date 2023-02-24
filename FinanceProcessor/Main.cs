@@ -1,14 +1,17 @@
 ﻿using FinanceProcessor.Application.Handlers;
 using FinanceProcessor.Core.Exceptions;
 using FinanceProcessor.Core.Stetement;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
 using Microsoft.Win32;
+using PdfSharp.Drawing;
+using PdfSharp.Drawing.Layout;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
 using Razor.Templating.Core;
 using Serilog;
 using Serilog.Context;
 using System.Data;
 using System.Diagnostics;
+using System.Text;
 using XMLToPDF;
 
 namespace FinanceProcessor
@@ -78,6 +81,27 @@ namespace FinanceProcessor
             ShowSildeLoader("Preparing...");
             await Task.Delay(500);
 
+            if (Model.FirstPage.DetailExcelLoc == string.Empty)
+            {
+                MessageBox.Show("Please click browse to choose detail Excel file", "Validation failed");
+                return;
+            }
+            if (Model.FirstPage.GroupExcelLoc == string.Empty)
+            {
+                MessageBox.Show("Please click browse to choose group Excel file", "Validation failed");
+                return;
+            }
+            if (Model.FirstPage.SinglePDFLoc == string.Empty)
+            {
+                MessageBox.Show("Please click browse to choose a location to save single page PDF statements", "Validation failed");
+                return;
+            }
+            if (Model.FirstPage.MultiPDFLoc == string.Empty)
+            {
+                MessageBox.Show("Please click browse to choose a location to save multi page PDF statements", "Validation failed");
+                return;
+            }
+
             try
             {
                 ShowSildeLoader("Reading details excel...");
@@ -133,6 +157,7 @@ namespace FinanceProcessor
             }
 
             StopSildeLoader();
+            Pager.SelectTab(1);
         }
 
         private async Task DisplayErrorPage(GenericException ex)
@@ -253,8 +278,7 @@ namespace FinanceProcessor
         {
             try
             {
-                await ValidateAsync();
-                Pager.SelectTab(1);
+                await ValidateAsync();               
             }
             catch (GenericException ex)
             {
@@ -342,11 +366,11 @@ namespace FinanceProcessor
             //DATA COLLECTION
             var singlePageStatements = allStatements.Where(s => s.Payments.Count <= 5).ToList();
             singlePageStatements.Sort((a, b) => string.Compare(a.TraySort, b.TraySort));
-            singlePageStatements = singlePageStatements.Take(30).ToList();
+            singlePageStatements = singlePageStatements.Take(10).ToList();
 
             var multiPageStatements = allStatements.Where(s => s.Payments.Count > 5).ToList();
             multiPageStatements.Sort((a, b) => string.Compare(a.TraySort, b.TraySort));
-            multiPageStatements = multiPageStatements.Take(30).ToList();
+            multiPageStatements = multiPageStatements.Take(10).ToList();
 
             ProgressBar.Invoke(() =>
             {
@@ -358,13 +382,13 @@ namespace FinanceProcessor
             SinglePageProcessing(singlePageStatements);
             WriteProgressText("Merging PDF pages...");
             WriteLog("Merging PDF pages...");
-            PageMergng(Model.FirstPage.SinglePDFLoc);  
-            
+            PageMergng(Model.FirstPage.SinglePDFLoc, singlePageStatements);
+
             //MULTI PAGE PROCESSING      
             MultiPageProcessing(multiPageStatements);
             WriteProgressText("Merging PDF pages...");
             WriteLog("Merging PDF pages...");
-            PageMergng(Model.FirstPage.MultiPDFLoc);
+            PageMergng(Model.FirstPage.MultiPDFLoc, multiPageStatements);
 
             //Completed
 
@@ -432,7 +456,7 @@ namespace FinanceProcessor
                             });
         }
 
-        private void PageMergng(string singlePdfLocation)
+        private void PageMergng(string singlePdfLocation, List<FinancialStatement> statements)
         {
             ProgressBar.Invoke(() =>
             {
@@ -442,31 +466,66 @@ namespace FinanceProcessor
 
             Parallel.Invoke(() =>
             {
-                string[] inputFiles = Directory.GetFiles("outputs/", "*.pdf");
-                // Create a new document object
-                var document = new Document();
-                // Create a PdfCopy object to write to the output file
-                var copy = new PdfCopy(document, new FileStream(singlePdfLocation, FileMode.Create));
-                // Open the document
-                document.Open();
-                // Loop through all the input PDF files and add them to the output file
+                string[] inputFiles = Directory.GetFiles("outputs/", "*.pdf")
+                                     .OrderBy(f => f)
+                                     .ToArray();
+
+                // Create a new PDF document object
+                var outputDocument = new PdfDocument();
+
+                // Register the encoding provider
+                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+                int j = 0;
+                int i = 0;
+                // Loop through all the input PDF files and add their pages to the output document
                 foreach (string inputFile in inputFiles)
                 {
-                    // Create a new PdfReader object for the input file
-                    PdfReader reader = new PdfReader(inputFile);
-                    // Loop through each page in the input file and add it to the output file
-                    for (int j = 1; j <= reader.NumberOfPages; j++)
+                    var recieptId = statements[i].ReceiptID.ToUpper();
+
+                    // Open the input PDF document
+                    var inputDocument = PdfReader.Open(inputFile, PdfDocumentOpenMode.Import);
+
+                    // Loop through each page in the input document and add it to the output document
+                    foreach (var inputPage in inputDocument.Pages)
                     {
-                        PdfImportedPage page = copy.GetImportedPage(reader, j);
-                        copy.AddPage(page);
+                        // Create a new page in the output document
+                        var outputPage = outputDocument.AddPage(inputPage);
+
+                        // Get the PdfContentByte object for the page
+                        XGraphics gfx = XGraphics.FromPdfPage(outputPage);
+                        // Create the font and brush
+                        XFont font = new XFont("Times New Roman", 9, XFontStyle.Regular);
+                        XBrush brush = XBrushes.Black;
+                        
+                        var footerText = $"{recieptId}                                        Produced by Tzedokos App - https://ahavastzedokos.com                                        Page {i+1} of {inputDocument.Pages.Count}";
+                        
+                        // Get the text size
+                        XSize size = gfx.MeasureString(footerText, font);
+                        // Create the formatter
+                        XTextFormatter tf = new XTextFormatter(gfx);
+                        // Calculate the x and y coordinates
+                        double x = (outputPage.Width - size.Width) / 2;
+                        double y = outputPage.Height - size.Height - 20;
+                        // Draw the text
+                        tf.DrawString(footerText, font, brush, new XRect(x, y, size.Width, size.Height), XStringFormats.TopLeft);
+
+                        i++;
                     }
-                    // Close the input reader
-                    reader.Close();
+
+                    // Close the input PDF document
+                    inputDocument.Close();
+                    j++;
                 }
-                // Close the output PdfCopy object and the document
-                copy.Close();
-                document.Close();
+
+                // Save the merged PDF document to the output file
+                outputDocument.Save(singlePdfLocation);
+
+                // Close the output PDF document
+                outputDocument.Close();
             });
+
+
 
             ProgressBar.Invoke(() =>
             {
@@ -508,7 +567,7 @@ namespace FinanceProcessor
                     WriteLog($"Completed '{s.FullName}'");
                     WriteProgressText($"Working on '{s.FullName}'");
                     MoveProgress();
-                });           
+                });
         }
 
         private void MoveProgress()

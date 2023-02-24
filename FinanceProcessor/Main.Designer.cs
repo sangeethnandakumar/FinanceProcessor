@@ -60,8 +60,8 @@
             LocDetailedExcel = new TextBox();
             label1 = new Label();
             tabPage2 = new TabPage();
-            groupBox4 = new GroupBox();
             label20 = new Label();
+            groupBox4 = new GroupBox();
             CPUCores = new ComboBox();
             label16 = new Label();
             panel8 = new Panel();
@@ -163,7 +163,7 @@
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(698, 500);
+            tabPage1.Size = new Size(698, 460);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
             tabPage1.UseVisualStyleBackColor = true;
@@ -174,7 +174,7 @@
             panel7.Controls.Add(BtnToOptions);
             panel7.Controls.Add(SideLoader);
             panel7.Dock = DockStyle.Bottom;
-            panel7.Location = new Point(3, 440);
+            panel7.Location = new Point(3, 400);
             panel7.Name = "panel7";
             panel7.Size = new Size(692, 57);
             panel7.TabIndex = 8;
@@ -269,10 +269,10 @@
             // 
             LocMultiplePDF.Location = new Point(83, 102);
             LocMultiplePDF.Name = "LocMultiplePDF";
+            LocMultiplePDF.PlaceholderText = "Click browse to choose a location";
             LocMultiplePDF.ReadOnly = true;
             LocMultiplePDF.Size = new Size(420, 23);
             LocMultiplePDF.TabIndex = 4;
-            LocMultiplePDF.Text = "D:\\test\\multiple.pdf";
             // 
             // label14
             // 
@@ -297,10 +297,10 @@
             // 
             LocSinglePDF.Location = new Point(83, 48);
             LocSinglePDF.Name = "LocSinglePDF";
+            LocSinglePDF.PlaceholderText = "Click browse to choose a location";
             LocSinglePDF.ReadOnly = true;
             LocSinglePDF.Size = new Size(420, 23);
             LocSinglePDF.TabIndex = 1;
-            LocSinglePDF.Text = "D:\\test\\single.pdf";
             // 
             // label15
             // 
@@ -328,9 +328,9 @@
             label4.AutoSize = true;
             label4.Location = new Point(76, 38);
             label4.Name = "label4";
-            label4.Size = new Size(149, 15);
+            label4.Size = new Size(177, 15);
             label4.TabIndex = 9;
-            label4.Text = "Select supported Excel files";
+            label4.Text = "Choose the input and otput files";
             // 
             // label3
             // 
@@ -403,10 +403,10 @@
             // 
             LocGroupExcel.Location = new Point(83, 102);
             LocGroupExcel.Name = "LocGroupExcel";
+            LocGroupExcel.PlaceholderText = "Click browse to choose a location";
             LocGroupExcel.ReadOnly = true;
             LocGroupExcel.Size = new Size(420, 23);
             LocGroupExcel.TabIndex = 4;
-            LocGroupExcel.Text = "C:\\Users\\Sangeeth Nandakumar\\Downloads\\group.xlsx";
             // 
             // label2
             // 
@@ -431,10 +431,10 @@
             // 
             LocDetailedExcel.Location = new Point(83, 48);
             LocDetailedExcel.Name = "LocDetailedExcel";
+            LocDetailedExcel.PlaceholderText = "Click browse to choose a location";
             LocDetailedExcel.ReadOnly = true;
             LocDetailedExcel.Size = new Size(420, 23);
             LocDetailedExcel.TabIndex = 1;
-            LocDetailedExcel.Text = "C:\\Users\\Sangeeth Nandakumar\\Downloads\\detail.xlsx";
             // 
             // label1
             // 
@@ -447,6 +447,7 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(label20);
             tabPage2.Controls.Add(groupBox4);
             tabPage2.Controls.Add(panel8);
             tabPage2.Controls.Add(groupBox3);
@@ -454,32 +455,31 @@
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(698, 493);
+            tabPage2.Size = new Size(698, 460);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label20
+            // 
+            label20.Font = new Font("Segoe UI", 8F, FontStyle.Italic, GraphicsUnit.Point);
+            label20.ForeColor = Color.Green;
+            label20.Location = new Point(318, 207);
+            label20.Name = "label20";
+            label20.Size = new Size(366, 115);
+            label20.TabIndex = 2;
+            label20.Text = resources.GetString("label20.Text");
+            // 
             // groupBox4
             // 
-            groupBox4.Controls.Add(label20);
             groupBox4.Controls.Add(CPUCores);
             groupBox4.Controls.Add(label16);
             groupBox4.Location = new Point(14, 198);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(670, 115);
+            groupBox4.Size = new Size(298, 83);
             groupBox4.TabIndex = 10;
             groupBox4.TabStop = false;
             groupBox4.Text = "Perfomance";
-            // 
-            // label20
-            // 
-            label20.AutoSize = true;
-            label20.Font = new Font("Segoe UI", 7.5F, FontStyle.Italic, GraphicsUnit.Point);
-            label20.Location = new Point(14, 78);
-            label20.Name = "label20";
-            label20.Size = new Size(632, 24);
-            label20.TabIndex = 2;
-            label20.Text = resources.GetString("label20.Text");
             // 
             // CPUCores
             // 
@@ -487,7 +487,7 @@
             CPUCores.FormattingEnabled = true;
             CPUCores.Location = new Point(191, 32);
             CPUCores.Name = "CPUCores";
-            CPUCores.Size = new Size(129, 23);
+            CPUCores.Size = new Size(81, 23);
             CPUCores.TabIndex = 1;
             CPUCores.SelectedIndexChanged += CPUCores_SelectedIndexChanged;
             // 
@@ -506,7 +506,7 @@
             panel8.Controls.Add(BtnToProcessing);
             panel8.Controls.Add(BtnToFirstPage);
             panel8.Dock = DockStyle.Bottom;
-            panel8.Location = new Point(3, 433);
+            panel8.Location = new Point(3, 400);
             panel8.Name = "panel8";
             panel8.Size = new Size(692, 57);
             panel8.TabIndex = 9;
@@ -585,9 +585,9 @@
             label5.AutoSize = true;
             label5.Location = new Point(76, 38);
             label5.Name = "label5";
-            label5.Size = new Size(142, 15);
+            label5.Size = new Size(207, 15);
             label5.TabIndex = 9;
-            label5.Text = "Enable supported options";
+            label5.Text = "Toggle options to configure operation";
             // 
             // label6
             // 
@@ -621,7 +621,7 @@
             tabPage3.Location = new Point(4, 24);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(698, 493);
+            tabPage3.Size = new Size(698, 460);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "tabPage3";
             // 
@@ -630,7 +630,7 @@
             panel10.BackColor = SystemColors.ControlLightLight;
             panel10.Controls.Add(BtnStop);
             panel10.Dock = DockStyle.Bottom;
-            panel10.Location = new Point(3, 433);
+            panel10.Location = new Point(3, 400);
             panel10.Name = "panel10";
             panel10.Size = new Size(692, 57);
             panel10.TabIndex = 9;
@@ -656,6 +656,7 @@
             // ProgressText
             // 
             ProgressText.AutoSize = true;
+            ProgressText.ForeColor = SystemColors.HotTrack;
             ProgressText.Location = new Point(287, 150);
             ProgressText.Name = "ProgressText";
             ProgressText.Size = new Size(221, 15);
@@ -706,9 +707,9 @@
             label7.AutoSize = true;
             label7.Location = new Point(76, 38);
             label7.Name = "label7";
-            label7.Size = new Size(149, 15);
+            label7.Size = new Size(213, 15);
             label7.TabIndex = 9;
-            label7.Text = "Select supported Excel files";
+            label7.Text = "Please wait while the operation finishes";
             // 
             // label8
             // 
@@ -739,7 +740,7 @@
             tabPage4.Location = new Point(4, 24);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new Padding(3);
-            tabPage4.Size = new Size(698, 493);
+            tabPage4.Size = new Size(698, 460);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "tabPage4";
             tabPage4.UseVisualStyleBackColor = true;
@@ -769,7 +770,7 @@
             panel12.BackColor = SystemColors.ControlLightLight;
             panel12.Controls.Add(BtnClose);
             panel12.Dock = DockStyle.Bottom;
-            panel12.Location = new Point(3, 433);
+            panel12.Location = new Point(3, 400);
             panel12.Name = "panel12";
             panel12.Size = new Size(692, 57);
             panel12.TabIndex = 9;
@@ -801,9 +802,9 @@
             label9.AutoSize = true;
             label9.Location = new Point(76, 38);
             label9.Name = "label9";
-            label9.Size = new Size(149, 15);
+            label9.Size = new Size(255, 15);
             label9.TabIndex = 9;
-            label9.Text = "Select supported Excel files";
+            label9.Text = "Go to your save location to fine the output files";
             // 
             // label10
             // 
@@ -834,7 +835,7 @@
             tabPage5.Location = new Point(4, 24);
             tabPage5.Name = "tabPage5";
             tabPage5.Padding = new Padding(3);
-            tabPage5.Size = new Size(698, 493);
+            tabPage5.Size = new Size(698, 500);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "tabPage5";
             tabPage5.UseVisualStyleBackColor = true;
@@ -843,11 +844,11 @@
             // 
             label17.AutoSize = true;
             label17.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            label17.Location = new Point(9, 407);
+            label17.Location = new Point(14, 479);
             label17.Name = "label17";
-            label17.Size = new Size(275, 12);
+            label17.Size = new Size(337, 12);
             label17.TabIndex = 11;
-            label17.Text = "Please send this information when connecting with developer";
+            label17.Text = "Please preserve this information when contacting developer to troubleshoot";
             // 
             // label13
             // 
@@ -862,7 +863,7 @@
             // 
             ErrorViewer.Location = new Point(28, 115);
             ErrorViewer.Name = "ErrorViewer";
-            ErrorViewer.Size = new Size(643, 267);
+            ErrorViewer.Size = new Size(643, 333);
             ErrorViewer.TabIndex = 5;
             ErrorViewer.Text = "";
             // 
@@ -883,9 +884,9 @@
             label11.AutoSize = true;
             label11.Location = new Point(76, 38);
             label11.Name = "label11";
-            label11.Size = new Size(179, 15);
+            label11.Size = new Size(303, 15);
             label11.TabIndex = 9;
-            label11.Text = "Please see full details of the error";
+            label11.Text = "An error occured please check the information collected";
             // 
             // label12
             // 
