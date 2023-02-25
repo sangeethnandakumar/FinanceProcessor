@@ -159,28 +159,47 @@ to update your contact information and to review your donation history:
 
          <div class="page-break" style="page-break-before:always">&nbsp;</div>
        
-        <table>
+        @{
+            var payments = Model.FinancialStatement.Payments.Skip(5).ToList(); // Skip first 5 items
+            var groupedPayments = payments.Select((p, i) => new { Payment = p, Index = i })
+                                           .GroupBy(x => x.Index / 32) // Group by 34 items per group
+                                           .ToList();
+        }
+
+        @for (int i = 0; i < groupedPayments.Count; i++)
+        {
+          <table style="margin-top:100px !important">
+            <tr>
+              <th>Date</th>
+              <th>Check #</th>
+              <th>Amount</th>
+            </tr>
+
+            @foreach(var payment in groupedPayments[i].Select(x => x.Payment))
+            {
               <tr>
-                <th>Date</th>
-                <th>Check #</th>
-                <th>Amount</th>
+                <td>@payment.Date.Month/@payment.Date.Day/@payment.Date.Year</td>
+                <td>@payment.CheckNumber</td>
+                <td>$@payment.Amount</td>
               </tr>
+            }
 
-              @foreach(var payment in Model.FinancialStatement.Payments.Skip(5))
-              {
-                <tr>
-                  <td>@payment.Date.Month/@payment.Date.Day/@payment.Date.Year</td>
-                  <td>@payment.CheckNumber</td>
-                  <td>$@payment.Amount</td>
-                </tr>
-              }
-
+            @if (i == groupedPayments.Count - 1) // Show total only on last page
+            {
               <tr style="background-color: #ffff;">
                 <td style="font-weight:600 !important; font-size: 40px !important">Total</td>
                 <td></td>
-                <td>$@Model.FinancialStatement.Payments.Sum(x=>x.Amount)</td>
+                <td>$@Model.FinancialStatement.Total</td>
               </tr>
-            </table>
+            }
+          </table>
+
+          @if (i != groupedPayments.Count - 1) // Don't add page break after last group
+          {
+            <div style="page-break-after: always;"></div> // Add page break after each group except the last one
+          }
+        }
+
 
       </div>
 

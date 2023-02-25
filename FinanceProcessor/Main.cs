@@ -144,19 +144,6 @@ namespace FinanceProcessor
                 StopSildeLoader();
             }
 
-            ShowSildeLoader("Checking compatibility...");
-            await Task.Delay(100);
-            if (!IsChromeInstalled())
-            {
-                throw new ExcelException(
-                  $"Cannot detect Google Chrome in this computer",
-                  "Is Chrome installed in this PC?",
-                  "Try running this app as administrator",
-                  "If not installed, Try installing Chrome",
-                  "If already installed, Try updating Chrome");
-            }
-
-            StopSildeLoader();
             Pager.SelectTab(1);
         }
 
@@ -278,7 +265,7 @@ namespace FinanceProcessor
         {
             try
             {
-                await ValidateAsync();               
+                await ValidateAsync();
             }
             catch (GenericException ex)
             {
@@ -498,9 +485,9 @@ namespace FinanceProcessor
                         // Create the font and brush
                         XFont font = new XFont("Times New Roman", 9, XFontStyle.Regular);
                         XBrush brush = XBrushes.Black;
-                        
-                        var footerText = $"{recieptId}                                        Produced by Tzedokos App - https://ahavastzedokos.com                                        Page {i+1} of {inputDocument.Pages.Count}";
-                        
+
+                        var footerText = $"{recieptId}                                        Produced by Tzedokos App - https://ahavastzedokos.com                                        Page {i + 1} of {inputDocument.Pages.Count}";
+
                         // Get the text size
                         XSize size = gfx.MeasureString(footerText, font);
                         // Create the formatter
@@ -520,7 +507,10 @@ namespace FinanceProcessor
                 }
 
                 // Save the merged PDF document to the output file
-                outputDocument.Save(singlePdfLocation);
+                if (statements.Any())
+                {
+                    outputDocument.Save(singlePdfLocation);
+                }
 
                 // Close the output PDF document
                 outputDocument.Close();
@@ -573,10 +563,13 @@ namespace FinanceProcessor
 
         private void MoveProgress()
         {
-            ProgressBar.Invoke(() =>
+            if (ProgressBar.Value < ProgressBar.Maximum)
             {
-                ProgressBar.Value++;
-            });
+                ProgressBar.Invoke(() =>
+                {
+                    ProgressBar.Value++;
+                });
+            }
         }
 
         private void WriteLog(string message)

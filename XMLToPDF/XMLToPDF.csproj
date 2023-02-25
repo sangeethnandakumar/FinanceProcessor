@@ -22,9 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="detail.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="group.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
