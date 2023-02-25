@@ -79,7 +79,7 @@ namespace FinanceProcessor
         {
             //Validate Excel
             ShowSildeLoader("Preparing...");
-            await Task.Delay(500);
+            await Task.Delay(100);
 
             if (Model.FirstPage.DetailExcelLoc == string.Empty)
             {
@@ -105,7 +105,7 @@ namespace FinanceProcessor
             try
             {
                 ShowSildeLoader("Reading details excel...");
-                await Task.Delay(250);
+                await Task.Delay(100);
                 Model.FirstPage.DetailTable = excelHandler.ParseExcelDataIntoDataTable(Model.FirstPage.DetailExcelLoc, 0);
             }
             catch (Exception)
@@ -126,7 +126,7 @@ namespace FinanceProcessor
             try
             {
                 ShowSildeLoader("Reading group excel...");
-                await Task.Delay(250);
+                await Task.Delay(100);
                 Model.FirstPage.GroupTable = excelHandler.ParseExcelDataIntoDataTable(Model.FirstPage.GroupExcelLoc, 0);
             }
             catch (Exception)
@@ -145,7 +145,7 @@ namespace FinanceProcessor
             }
 
             ShowSildeLoader("Checking compatibility...");
-            await Task.Delay(250);
+            await Task.Delay(100);
             if (!IsChromeInstalled())
             {
                 throw new ExcelException(
@@ -350,6 +350,7 @@ namespace FinanceProcessor
                     TraySort = group.ItemArray[8].ToString(),
                     Pages = int.Parse(group.ItemArray[9].ToString()),
                     Total = decimal.Parse(group.ItemArray[10].ToString()),
+                    FicialYear = int.Parse(group.ItemArray[11].ToString()),
 
                     Payments = matchingRows.Select(row => new Payment
                     {
@@ -366,11 +367,11 @@ namespace FinanceProcessor
             //DATA COLLECTION
             var singlePageStatements = allStatements.Where(s => s.Payments.Count <= 5).ToList();
             singlePageStatements.Sort((a, b) => string.Compare(a.TraySort, b.TraySort));
-            singlePageStatements = singlePageStatements.Take(10).ToList();
+            //singlePageStatements = singlePageStatements.Take(50).ToList();
 
             var multiPageStatements = allStatements.Where(s => s.Payments.Count > 5).ToList();
             multiPageStatements.Sort((a, b) => string.Compare(a.TraySort, b.TraySort));
-            multiPageStatements = multiPageStatements.Take(10).ToList();
+            //multiPageStatements = multiPageStatements.Take(50).ToList();
 
             ProgressBar.Invoke(() =>
             {
@@ -382,13 +383,13 @@ namespace FinanceProcessor
             SinglePageProcessing(singlePageStatements);
             WriteProgressText("Merging PDF pages...");
             WriteLog("Merging PDF pages...");
-            PageMergng(Model.FirstPage.SinglePDFLoc, singlePageStatements);
+            PageMerging(Model.FirstPage.SinglePDFLoc, singlePageStatements);
 
             //MULTI PAGE PROCESSING      
             MultiPageProcessing(multiPageStatements);
             WriteProgressText("Merging PDF pages...");
             WriteLog("Merging PDF pages...");
-            PageMergng(Model.FirstPage.MultiPDFLoc, multiPageStatements);
+            PageMerging(Model.FirstPage.MultiPDFLoc, multiPageStatements);
 
             //Completed
 
@@ -448,7 +449,7 @@ namespace FinanceProcessor
                                 model.Images.Add("qrCode", XMLProcessor.GenerateQRCode(model.FinancialStatement.QRContent));
 
                                 var html = await RazorTemplateEngine.RenderAsync("/MultiPageTheme.cshtml", model);
-                                PDFEngine.Generate(html, $"outputs/{i++}.pdf");
+                                PDFEngine.Generate(html, $"outputs/{s.TraySort.Replace("/", "_")}.pdf");
 
                                 WriteLog($"Completed '{s.FullName}'");
                                 WriteProgressText($"Working on '{s.FullName}'");
@@ -456,7 +457,7 @@ namespace FinanceProcessor
                             });
         }
 
-        private void PageMergng(string singlePdfLocation, List<FinancialStatement> statements)
+        private void PageMerging(string singlePdfLocation, List<FinancialStatement> statements)
         {
             ProgressBar.Invoke(() =>
             {
@@ -477,11 +478,11 @@ namespace FinanceProcessor
                 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
                 int j = 0;
-                int i = 0;
                 // Loop through all the input PDF files and add their pages to the output document
                 foreach (string inputFile in inputFiles)
                 {
-                    var recieptId = statements[i].ReceiptID.ToUpper();
+                    int i = 0;
+                    var recieptId = statements[j].ReceiptID.ToUpper();
 
                     // Open the input PDF document
                     var inputDocument = PdfReader.Open(inputFile, PdfDocumentOpenMode.Import);
@@ -562,7 +563,7 @@ namespace FinanceProcessor
                     model.Images.Add("qrCode", XMLProcessor.GenerateQRCode(model.FinancialStatement.QRContent));
 
                     var html = await RazorTemplateEngine.RenderAsync("/Theme.cshtml", model);
-                    PDFEngine.Generate(html, $"outputs/{i++}.pdf");
+                    PDFEngine.Generate(html, $"outputs/{s.TraySort.Replace("/", "_")}.pdf");
 
                     WriteLog($"Completed '{s.FullName}'");
                     WriteProgressText($"Working on '{s.FullName}'");
