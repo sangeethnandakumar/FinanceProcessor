@@ -148,10 +148,10 @@
             Pager.Controls.Add(tabPage3);
             Pager.Controls.Add(tabPage4);
             Pager.Controls.Add(tabPage5);
-            Pager.Location = new Point(-6, -28);
+            Pager.Location = new Point(-6, 6);
             Pager.Name = "Pager";
             Pager.SelectedIndex = 0;
-            Pager.Size = new Size(706, 528);
+            Pager.Size = new Size(706, 494);
             Pager.TabIndex = 0;
             // 
             // tabPage1
@@ -163,7 +163,7 @@
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(698, 460);
+            tabPage1.Size = new Size(698, 466);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
             tabPage1.UseVisualStyleBackColor = true;
@@ -174,7 +174,7 @@
             panel7.Controls.Add(BtnToOptions);
             panel7.Controls.Add(SideLoader);
             panel7.Dock = DockStyle.Bottom;
-            panel7.Location = new Point(3, 400);
+            panel7.Location = new Point(3, 406);
             panel7.Name = "panel7";
             panel7.Size = new Size(692, 57);
             panel7.TabIndex = 8;
@@ -455,7 +455,7 @@
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(698, 460);
+            tabPage2.Size = new Size(698, 466);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
@@ -506,7 +506,7 @@
             panel8.Controls.Add(BtnToProcessing);
             panel8.Controls.Add(BtnToFirstPage);
             panel8.Dock = DockStyle.Bottom;
-            panel8.Location = new Point(3, 400);
+            panel8.Location = new Point(3, 406);
             panel8.Name = "panel8";
             panel8.Size = new Size(692, 57);
             panel8.TabIndex = 9;
@@ -621,7 +621,7 @@
             tabPage3.Location = new Point(4, 24);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(698, 460);
+            tabPage3.Size = new Size(698, 466);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "tabPage3";
             // 
@@ -630,7 +630,7 @@
             panel10.BackColor = SystemColors.ControlLightLight;
             panel10.Controls.Add(BtnStop);
             panel10.Dock = DockStyle.Bottom;
-            panel10.Location = new Point(3, 400);
+            panel10.Location = new Point(3, 406);
             panel10.Name = "panel10";
             panel10.Size = new Size(692, 57);
             panel10.TabIndex = 9;
@@ -740,7 +740,7 @@
             tabPage4.Location = new Point(4, 24);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new Padding(3);
-            tabPage4.Size = new Size(698, 460);
+            tabPage4.Size = new Size(698, 466);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "tabPage4";
             tabPage4.UseVisualStyleBackColor = true;
@@ -770,7 +770,7 @@
             panel12.BackColor = SystemColors.ControlLightLight;
             panel12.Controls.Add(BtnClose);
             panel12.Dock = DockStyle.Bottom;
-            panel12.Location = new Point(3, 400);
+            panel12.Location = new Point(3, 406);
             panel12.Name = "panel12";
             panel12.Size = new Size(692, 57);
             panel12.TabIndex = 9;
@@ -835,7 +835,7 @@
             tabPage5.Location = new Point(4, 24);
             tabPage5.Name = "tabPage5";
             tabPage5.Padding = new Padding(3);
-            tabPage5.Size = new Size(698, 500);
+            tabPage5.Size = new Size(698, 466);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "tabPage5";
             tabPage5.UseVisualStyleBackColor = true;

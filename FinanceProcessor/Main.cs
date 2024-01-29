@@ -344,8 +344,7 @@ namespace FinanceProcessor
                         ReceiptID = row.ItemArray[0].ToString(),
                         Date = DateTime.Parse(row.ItemArray[1].ToString()),
                         Check = row.ItemArray[2].ToString(),
-                        CheckNumber = row.ItemArray[3].ToString(),
-                        Amount = decimal.Parse(row.ItemArray[4].ToString())
+                        Amount = decimal.Parse(row.ItemArray[3].ToString())
                     }).ToList()
                 });
             }

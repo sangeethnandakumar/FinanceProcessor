@@ -7,7 +7,6 @@ namespace FinanceProcessor.Core.Stetement
         public string ReceiptID { get; set; }
         public DateTime Date { get; set; }
         public string Check { get; set; }
-        public string CheckNumber { get; set; }
         public decimal Amount { get; set; }
     }
 }
