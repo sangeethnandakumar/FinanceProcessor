@@ -614,7 +614,18 @@ namespace FinanceProcessor
                                 model.Images.Add("qrCode", XMLProcessor.GenerateQRCode(model.FinancialStatement.QRContent));
 
                                 WriteProgressSubText($"Building PDF structure...");
-                                var html = await RazorTemplateEngine.RenderAsync("/MultiPageTheme.cshtml", model);
+
+                                var html = "";
+                                if (model.FinancialStatement.Payments.Count > 5)
+                                {
+                                    html = await RazorTemplateEngine.RenderAsync("/MultiPageTheme.cshtml", model);
+                                }
+                                else
+                                {
+                                    html = await RazorTemplateEngine.RenderAsync("/SinglePageTheme.cshtml", model);
+                                }
+
+                                //File.WriteAllText("D:\\Process\\layout.html", html);
 
                                 if (!Directory.Exists($"multi"))
                                 {

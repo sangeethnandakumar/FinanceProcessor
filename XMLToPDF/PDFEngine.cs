@@ -13,7 +13,7 @@
                     PrintBackground = true,
                     PaperWidth = 8.5, // A4 width in inches
                     PaperHeight = 11, // A4 height in inches
-                    Scale= 1,
+                    Scale = 1,
                 });
             }
         }

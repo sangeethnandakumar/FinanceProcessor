@@ -80,19 +80,20 @@
 </head>
 <body>     
 
-      <div class="container-fluid"  style="margin-top:100px !important">
+      <div class="container-fluid"  style="margin-top:100px !important">  
 
-         <div class="row" style="margin-top:20px !important">
-      <div class="col-md-1" style="padding-left: 0px !important;">
-            <img width="150" src="data:image/jpg;base64,@Model.Images["logo"]" />
-        </div>
-        <div class="col-md-11" style="padding-left:25px; margin:0px;">
-            <p class="header" style="margin-top:12px; font-size:35px !important">Ahavas Tzedokos</p>
-            <p class="header">TaxID# 81-3148868</p>
-            <p class="header">Shluchei Mitzva • Zichron Shlotmo • Tomchei Tzedaka • Bais Yisroel • Botoshan • Ahavas Yisroel • Chasadim Tovim</p>
-            <p class="header">326 3rd St, Lakewood, New Jersey 08701 | (347) 429-5000</p>
-        </div>
-      </div>
+      <div class="row" style="margin-top:20px !important; display: flex;">
+    <div style="flex: 0 0 auto; padding-left: 0px !important;">
+        <img width="150" src="data:image/jpg;base64,@Model.Images["logo"]" />
+    </div>
+    <div style="flex-grow: 1; padding-left:25px; margin:0px;">
+        <p class="header" style="margin-top:12px; font-size:35px !important">Ahavas Tzedokos</p>
+        <p class="header">TaxID# 81-3148868</p>
+        <p class="header">Shluchei Mitzva • Zichron Shlotmo • Tomchei Tzedaka • Bais Yisroel • Botoshan • Ahavas Yisroel • Chasadim Tovim</p>
+        <p class="header">326 3rd St, Lakewood, New Jersey 08701 | (347) 429-5000</p>
+    </div>
+</div>
+
 
       <hr style="border-color: black !important;">
 
@@ -126,16 +127,21 @@ or send a text to (347) 429-5000. We also welcome any questions or comments by e
     </div>
 
 
-      <div class="row mt-6" style="margin-top:80px !important">
-      <div class="col-md-9">
-            <p>Alternatively, as an additional courtesy, you may use the QR Code provided here
+<div class="row mt-6 d-flex align-items-start" style="margin-top:80px !important">
+    <div class="col-9">
+        <p>Alternatively, as an additional courtesy, you may use the QR Code provided here
 to update your contact information and to review your donation history:
 </p>
-        </div>
-        <div class="col-md-3">
-            <img  width="300" src="data:image/png;base64,@Model.Images["qrCode"]"/>
-        </div>
-      </div>
+    </div>
+    <div class="col-3">
+        <img width="300" src="data:image/png;base64,@Model.Images["qrCode"]"/>
+    </div>
+</div>
+
+
+
+
+
       
       <div class="row mt-4" style="margin-top:40px">
       <div class="col-md-12">
