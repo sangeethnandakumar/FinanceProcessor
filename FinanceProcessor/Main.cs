@@ -369,9 +369,9 @@ namespace FinanceProcessor
             ResetOutputFolder();
 
             var statements = allStatements.OrderBy(x => x.CRST_Sort).ToList();
-            statements = statements.Take(2).ToList();
+            //statements = statements.Take(2).ToList();
 
-            MultiPageProcessingAndMerging(Model.FirstPage.MultiPDFLoc, statements);
+            ProcessingAndMerging(Model.FirstPage.MultiPDFLoc, statements);
 
             //Completed
             if (Model.SecondPage.NotifyWhenCompleted)
@@ -575,7 +575,7 @@ namespace FinanceProcessor
         //    ResetOutputFolder();
         //}
 
-        private void MultiPageProcessingAndMerging(string singlePdfLocation, List<FinancialStatement> statements)
+        private void ProcessingAndMerging(string singlePdfLocation, List<FinancialStatement> statements)
         {
             var fileNo = 1;
 
@@ -668,7 +668,7 @@ namespace FinanceProcessor
                                         // Get the PdfContentByte object for the page
                                         XGraphics gfx = XGraphics.FromPdfPage(outputPage);
                                         // Create the font and brush
-                                        XFont font = new XFont("Times New Roman", 9, XFontStyle.Regular);
+                                        XFont font = new XFont("Times New Roman", 9);
                                         XBrush brush = XBrushes.Black;
 
                                         var footerText = $"{s.ReceiptID.ToUpper()}                                        Produced by Tzedokos App - https://ahavastzedokos.com                                        Page {i + 1} of {inputDocument.Pages.Count}";
@@ -739,7 +739,14 @@ namespace FinanceProcessor
                     }
                 }
 
-                outputDocument.Save(Path.Combine(Path.GetDirectoryName(Model.FirstPage.DetailExcelLoc), $"Merged {GetLeafFolderName(pageDirectory)} PDFs - In CRST Order.pdf"));
+                if(GetLeafFolderName(pageDirectory) == "1 Page")
+                {
+                    outputDocument.Save(Path.Combine(Path.GetDirectoryName(Model.FirstPage.DetailExcelLoc), $"Merged SinglePage PDFs - In CRST Order.pdf"));
+                }
+                else
+                {
+                outputDocument.Save(Path.Combine(Path.GetDirectoryName(Model.FirstPage.DetailExcelLoc), $"Merged MultiPage ({GetLeafFolderName(pageDirectory)}) PDFs - In CRST Order.pdf"));
+                }
 
                 // Close the output PDF document
                 outputDocument.Close();
