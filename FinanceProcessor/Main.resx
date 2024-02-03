@@ -117,14 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="label20.Text" xml:space="preserve">
-    <value>The app autodetects CPU cores available in this computer.
-
-Keep defaults to utilise max power of CPU. This will lead to faster completion
-
-If you're experiancing non responsiveness due to heavy CPU load, try reduce down CPU usage with this setting.
-Note that, This will make processing slower</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBox8.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -396,6 +388,14 @@ Note that, This will make processing slower</value>
         FUPqsmjM2MWFfMqWBVgcrcxhbywHLYhhLJS9B803GmAxJGpjKb/kkk8s5WVDNphyxZB6NX3faIHFinBg
         sSIcWKwIBxYrwoHFinBgsSIUrVX/A++0UH39CLBdAAAAAElFTkSuQmCC
 </value>
+  </data>
+  <data name="label20.Text" xml:space="preserve">
+    <value>The app autodetects CPU cores available in this PC.
+
+By default the app uses 50% of CPU, If you want you can peek it into maximum above
+
+Be aware that, the more CPU cores you allocate, The faster the processing.
+Windows may respond slower if all CPUs are dedicated and used by this app</value>
   </data>
   <data name="pictureBox4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

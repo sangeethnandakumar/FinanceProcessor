@@ -151,7 +151,7 @@ to update your contact information and to review your donation history:
       @foreach(var payment in Model.FinancialStatement.Payments)
         {
           <tr>
-              <td>@payment.Date.ToString("MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture)</td>
+              <td>@payment.Date</td>
               <td>@payment.Check</td>
               <td>$@payment.Amount</td>
           </tr>

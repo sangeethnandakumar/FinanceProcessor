@@ -61,20 +61,20 @@
             label1 = new Label();
             tabPage2 = new TabPage();
             label20 = new Label();
-            groupBox4 = new GroupBox();
-            CPUCores = new ComboBox();
-            label16 = new Label();
             panel8 = new Panel();
             BtnToProcessing = new Button();
             BtnToFirstPage = new Button();
             groupBox3 = new GroupBox();
             ChkOpen = new CheckBox();
+            CPUCores = new ComboBox();
             ChkNotify = new CheckBox();
+            label16 = new Label();
             panel2 = new Panel();
             label5 = new Label();
             label6 = new Label();
             pictureBox4 = new PictureBox();
             tabPage3 = new TabPage();
+            ProgressSubText = new Label();
             panel10 = new Panel();
             BtnStop = new Button();
             ProgressBar = new ProgressBar();
@@ -120,7 +120,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabPage2.SuspendLayout();
-            groupBox4.SuspendLayout();
             panel8.SuspendLayout();
             groupBox3.SuspendLayout();
             panel2.SuspendLayout();
@@ -148,10 +147,10 @@
             Pager.Controls.Add(tabPage3);
             Pager.Controls.Add(tabPage4);
             Pager.Controls.Add(tabPage5);
-            Pager.Location = new Point(-6, 6);
+            Pager.Location = new Point(-6, -30);
             Pager.Name = "Pager";
             Pager.SelectedIndex = 0;
-            Pager.Size = new Size(706, 494);
+            Pager.Size = new Size(706, 530);
             Pager.TabIndex = 0;
             // 
             // tabPage1
@@ -163,7 +162,7 @@
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(698, 466);
+            tabPage1.Size = new Size(698, 502);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
             tabPage1.UseVisualStyleBackColor = true;
@@ -174,7 +173,7 @@
             panel7.Controls.Add(BtnToOptions);
             panel7.Controls.Add(SideLoader);
             panel7.Dock = DockStyle.Bottom;
-            panel7.Location = new Point(3, 406);
+            panel7.Location = new Point(3, 442);
             panel7.Name = "panel7";
             panel7.Size = new Size(692, 57);
             panel7.TabIndex = 8;
@@ -234,6 +233,7 @@
             groupBox2.TabIndex = 4;
             groupBox2.TabStop = false;
             groupBox2.Text = "Output";
+            groupBox2.Visible = false;
             // 
             // pictureBox8
             // 
@@ -273,6 +273,7 @@
             LocMultiplePDF.ReadOnly = true;
             LocMultiplePDF.Size = new Size(420, 23);
             LocMultiplePDF.TabIndex = 4;
+            LocMultiplePDF.Text = "Default";
             // 
             // label14
             // 
@@ -301,6 +302,7 @@
             LocSinglePDF.ReadOnly = true;
             LocSinglePDF.Size = new Size(420, 23);
             LocSinglePDF.TabIndex = 1;
+            LocSinglePDF.Text = "Default";
             // 
             // label15
             // 
@@ -335,7 +337,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Tahoma", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Font = new Font("Tahoma", 14.25F);
             label3.Location = new Point(75, 15);
             label3.Name = "label3";
             label3.Size = new Size(161, 23);
@@ -448,57 +450,30 @@
             // tabPage2
             // 
             tabPage2.Controls.Add(label20);
-            tabPage2.Controls.Add(groupBox4);
             tabPage2.Controls.Add(panel8);
             tabPage2.Controls.Add(groupBox3);
             tabPage2.Controls.Add(panel2);
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(698, 466);
+            tabPage2.Size = new Size(698, 475);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
             // 
             // label20
             // 
-            label20.Font = new Font("Segoe UI", 8F, FontStyle.Italic, GraphicsUnit.Point);
-            label20.ForeColor = Color.Green;
-            label20.Location = new Point(318, 207);
+            label20.BackColor = Color.FromArgb(255, 255, 192);
+            label20.BorderStyle = BorderStyle.Fixed3D;
+            label20.Dock = DockStyle.Bottom;
+            label20.FlatStyle = FlatStyle.Flat;
+            label20.Font = new Font("Tahoma", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label20.ForeColor = Color.Black;
+            label20.Location = new Point(3, 299);
             label20.Name = "label20";
-            label20.Size = new Size(366, 115);
-            label20.TabIndex = 2;
+            label20.Size = new Size(692, 116);
+            label20.TabIndex = 10;
             label20.Text = resources.GetString("label20.Text");
-            // 
-            // groupBox4
-            // 
-            groupBox4.Controls.Add(CPUCores);
-            groupBox4.Controls.Add(label16);
-            groupBox4.Location = new Point(14, 198);
-            groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(298, 83);
-            groupBox4.TabIndex = 10;
-            groupBox4.TabStop = false;
-            groupBox4.Text = "Perfomance";
-            // 
-            // CPUCores
-            // 
-            CPUCores.DropDownStyle = ComboBoxStyle.DropDownList;
-            CPUCores.FormattingEnabled = true;
-            CPUCores.Location = new Point(191, 32);
-            CPUCores.Name = "CPUCores";
-            CPUCores.Size = new Size(81, 23);
-            CPUCores.TabIndex = 1;
-            CPUCores.SelectedIndexChanged += CPUCores_SelectedIndexChanged;
-            // 
-            // label16
-            // 
-            label16.AutoSize = true;
-            label16.Location = new Point(14, 35);
-            label16.Name = "label16";
-            label16.Size = new Size(157, 15);
-            label16.TabIndex = 0;
-            label16.Text = "How many CPU cores to use";
             // 
             // panel8
             // 
@@ -506,7 +481,7 @@
             panel8.Controls.Add(BtnToProcessing);
             panel8.Controls.Add(BtnToFirstPage);
             panel8.Dock = DockStyle.Bottom;
-            panel8.Location = new Point(3, 406);
+            panel8.Location = new Point(3, 415);
             panel8.Name = "panel8";
             panel8.Size = new Size(692, 57);
             panel8.TabIndex = 9;
@@ -534,10 +509,12 @@
             // groupBox3
             // 
             groupBox3.Controls.Add(ChkOpen);
+            groupBox3.Controls.Add(CPUCores);
             groupBox3.Controls.Add(ChkNotify);
+            groupBox3.Controls.Add(label16);
             groupBox3.Location = new Point(14, 95);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(670, 94);
+            groupBox3.Size = new Size(670, 118);
             groupBox3.TabIndex = 4;
             groupBox3.TabStop = false;
             groupBox3.Text = "Options";
@@ -549,11 +526,21 @@
             ChkOpen.CheckState = CheckState.Checked;
             ChkOpen.Location = new Point(14, 57);
             ChkOpen.Name = "ChkOpen";
-            ChkOpen.Size = new Size(195, 19);
+            ChkOpen.Size = new Size(220, 19);
             ChkOpen.TabIndex = 1;
-            ChkOpen.Text = "Open PDF files when completed";
+            ChkOpen.Text = "Open output folder when completed";
             ChkOpen.UseVisualStyleBackColor = true;
             ChkOpen.CheckedChanged += ChkOpen_CheckedChanged;
+            // 
+            // CPUCores
+            // 
+            CPUCores.DropDownStyle = ComboBoxStyle.DropDownList;
+            CPUCores.FormattingEnabled = true;
+            CPUCores.Location = new Point(191, 85);
+            CPUCores.Name = "CPUCores";
+            CPUCores.Size = new Size(81, 23);
+            CPUCores.TabIndex = 1;
+            CPUCores.SelectedIndexChanged += CPUCores_SelectedIndexChanged;
             // 
             // ChkNotify
             // 
@@ -567,6 +554,15 @@
             ChkNotify.Text = "Notify when completed";
             ChkNotify.UseVisualStyleBackColor = true;
             ChkNotify.CheckedChanged += ChkNotify_CheckedChanged;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new Point(14, 88);
+            label16.Name = "label16";
+            label16.Size = new Size(157, 15);
+            label16.TabIndex = 0;
+            label16.Text = "How many CPU cores to use";
             // 
             // panel2
             // 
@@ -592,7 +588,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Tahoma", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Font = new Font("Tahoma", 14.25F);
             label6.Location = new Point(75, 15);
             label6.Name = "label6";
             label6.Size = new Size(106, 23);
@@ -612,6 +608,7 @@
             // tabPage3
             // 
             tabPage3.BackColor = Color.White;
+            tabPage3.Controls.Add(ProgressSubText);
             tabPage3.Controls.Add(panel10);
             tabPage3.Controls.Add(ProgressBar);
             tabPage3.Controls.Add(ProgressText);
@@ -621,16 +618,26 @@
             tabPage3.Location = new Point(4, 24);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(698, 466);
+            tabPage3.Size = new Size(698, 480);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "tabPage3";
+            // 
+            // ProgressSubText
+            // 
+            ProgressSubText.AutoSize = true;
+            ProgressSubText.ForeColor = SystemColors.ControlDark;
+            ProgressSubText.Location = new Point(287, 165);
+            ProgressSubText.Name = "ProgressSubText";
+            ProgressSubText.Size = new Size(59, 15);
+            ProgressSubText.TabIndex = 10;
+            ProgressSubText.Text = "Loading...";
             // 
             // panel10
             // 
             panel10.BackColor = SystemColors.ControlLightLight;
             panel10.Controls.Add(BtnStop);
             panel10.Dock = DockStyle.Bottom;
-            panel10.Location = new Point(3, 406);
+            panel10.Location = new Point(3, 420);
             panel10.Name = "panel10";
             panel10.Size = new Size(692, 57);
             panel10.TabIndex = 9;
@@ -666,9 +673,9 @@
             // pictureBox10
             // 
             pictureBox10.Image = (Image)resources.GetObject("pictureBox10.Image");
-            pictureBox10.Location = new Point(287, 136);
+            pictureBox10.Location = new Point(287, 188);
             pictureBox10.Name = "pictureBox10";
-            pictureBox10.Size = new Size(384, 273);
+            pictureBox10.Size = new Size(384, 221);
             pictureBox10.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox10.TabIndex = 7;
             pictureBox10.TabStop = false;
@@ -714,7 +721,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Font = new Font("Tahoma", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.Font = new Font("Tahoma", 14.25F);
             label8.Location = new Point(75, 15);
             label8.Name = "label8";
             label8.Size = new Size(116, 23);
@@ -740,7 +747,7 @@
             tabPage4.Location = new Point(4, 24);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new Padding(3);
-            tabPage4.Size = new Size(698, 466);
+            tabPage4.Size = new Size(698, 480);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "tabPage4";
             tabPage4.UseVisualStyleBackColor = true;
@@ -748,7 +755,7 @@
             // label21
             // 
             label21.AutoSize = true;
-            label21.Font = new Font("Tahoma", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label21.Font = new Font("Tahoma", 14.25F);
             label21.Location = new Point(180, 266);
             label21.Name = "label21";
             label21.Size = new Size(299, 23);
@@ -770,7 +777,7 @@
             panel12.BackColor = SystemColors.ControlLightLight;
             panel12.Controls.Add(BtnClose);
             panel12.Dock = DockStyle.Bottom;
-            panel12.Location = new Point(3, 406);
+            panel12.Location = new Point(3, 420);
             panel12.Name = "panel12";
             panel12.Size = new Size(692, 57);
             panel12.TabIndex = 9;
@@ -809,7 +816,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Font = new Font("Tahoma", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label10.Font = new Font("Tahoma", 14.25F);
             label10.Location = new Point(75, 15);
             label10.Name = "label10";
             label10.Size = new Size(198, 23);
@@ -835,7 +842,7 @@
             tabPage5.Location = new Point(4, 24);
             tabPage5.Name = "tabPage5";
             tabPage5.Padding = new Padding(3);
-            tabPage5.Size = new Size(698, 466);
+            tabPage5.Size = new Size(698, 480);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "tabPage5";
             tabPage5.UseVisualStyleBackColor = true;
@@ -843,7 +850,7 @@
             // label17
             // 
             label17.AutoSize = true;
-            label17.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            label17.Font = new Font("Segoe UI", 7F);
             label17.Location = new Point(14, 479);
             label17.Name = "label17";
             label17.Size = new Size(337, 12);
@@ -891,7 +898,7 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Font = new Font("Tahoma", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label12.Font = new Font("Tahoma", 14.25F);
             label12.Location = new Point(75, 15);
             label12.Name = "label12";
             label12.Size = new Size(156, 23);
@@ -962,8 +969,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             tabPage2.ResumeLayout(false);
-            groupBox4.ResumeLayout(false);
-            groupBox4.PerformLayout();
             panel8.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
@@ -1072,11 +1077,11 @@
         private Panel panel12;
         private Button BtnClose;
         private System.ComponentModel.BackgroundWorker Worker;
-        private GroupBox groupBox4;
         private ComboBox CPUCores;
         private Label label16;
-        private Label label20;
         private Label label21;
         private PictureBox pictureBox11;
+        private Label ProgressSubText;
+        private Label label20;
     }
 }

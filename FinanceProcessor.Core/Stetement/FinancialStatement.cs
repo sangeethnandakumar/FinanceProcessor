@@ -16,6 +16,7 @@ namespace FinanceProcessor.Core.Stetement
         public int Pages { get; set; }
         public decimal Total { get; set; }
         public int FicialYear { get; set; }
+        public int CRST_Sort { get; set; }
         public List<Payment> Payments { get; set; }
     }
 }

@@ -150,7 +150,7 @@ to update your contact information and to review your donation history:
               @foreach(var payment in Model.FinancialStatement.Payments.Take(5))
               {
                 <tr>
-                  <td>@payment.Date.ToString("MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture)</td>
+                  <td>@payment.Date</td>
                   <td>@payment.Check</td>
                   <td>$@payment.Amount</td>
                 </tr>
@@ -178,7 +178,7 @@ to update your contact information and to review your donation history:
             @foreach(var payment in groupedPayments[i].Select(x => x.Payment))
             {
               <tr>
-                <td>@payment.Date.ToString("MM/dd/yyyy",System.Globalization.CultureInfo.InvariantCulture)</td>
+                <td>@payment.Date</td>
                 <td>@payment.Check</td>
                 <td>$@payment.Amount</td>
               </tr>
