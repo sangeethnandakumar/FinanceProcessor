@@ -369,7 +369,7 @@ namespace FinanceProcessor
             ResetOutputFolder();
 
             var statements = allStatements.OrderBy(x => x.CRST_Sort).ToList();
-            statements = statements.Take(2).ToList();
+            //statements = statements.Take(2).ToList();
 
             MultiPageProcessingAndMerging(Model.FirstPage.MultiPDFLoc, statements);
 
